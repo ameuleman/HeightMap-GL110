@@ -1,22 +1,20 @@
-#version 330 core
+#version 110
 
 in vec4 position;
 in vec3 normal;
 in vec3 colour;
 
-out  float hight;
-out  vec3 col;
-out  vec3 nor;
-out  vec3 eyeDir;
-out  vec4 shadowCoord;
+varying  vec3 col;
+varying  vec3 nor;
+varying  vec3 eyeDir;
+varying  vec4 shadowCoord;
 
 uniform mat4 mvpMatrix;
 uniform vec3 cameraPos;
 uniform mat4 shadowMapMatrix;
 
 void main() {
-	hight = position.z / 50;
-	col = colour;
+        col = colour;
 	nor = normal;
 
 	//direction of the eye (from the camera to the vertex, because reflexion of lightDir is from the light to the fragment)
@@ -26,5 +24,5 @@ void main() {
 	shadowCoord = shadowMapMatrix * position;
 	
 	//Output position of the vertex
-	gl_Position = mvpMatrix * position;
+        gl_Position = mvpMatrix * position;
 }
