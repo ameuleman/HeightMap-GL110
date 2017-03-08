@@ -1,11 +1,9 @@
 #version 110
 
-in vec4 position;
-
 uniform mat4 matrix;
 
 void main(void){
 
 	//output: the position of the vertex for the map
-	gl_Position =  matrix * position;
+        gl_Position =  matrix * gl_Vertex;
 }
