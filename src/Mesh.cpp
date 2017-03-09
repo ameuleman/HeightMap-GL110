@@ -134,16 +134,16 @@ void Mesh::render()
 
     if(m_hasNormalData)
     {
-        glEnableVertexAttribArray(2);
+        glEnableVertexAttribArray(1);
         glBindBuffer(GL_ARRAY_BUFFER, m_normalBuffer);
-        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
     }
 
     if(m_hasColourData)
     {
-        glEnableVertexAttribArray(3);
+        glEnableVertexAttribArray(2);
         glBindBuffer(GL_ARRAY_BUFFER, m_colourBuffer);
-        glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
     }
 
     if(m_usesIndex)
@@ -162,10 +162,10 @@ void Mesh::render()
     glDisableVertexAttribArray(0);
 
     if(m_hasNormalData)
-        glDisableVertexAttribArray(2);
+        glDisableVertexAttribArray(1);
 
     if(m_hasColourData)
-        glDisableVertexAttribArray(3);
+        glDisableVertexAttribArray(2);
 }
 
 //------------------------------------------------------------------------------
