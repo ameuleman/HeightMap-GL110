@@ -34,7 +34,7 @@ void main()
 //---------
 {
         col = color;
-	nor = normal;
+        nor = normal;
 
         //direction of the eye (from the camera to the vertex, because reflexion of lightDir is from the light to the fragment)
         eyeDir = normalize(gl_Vertex.xyz - cameraPos);

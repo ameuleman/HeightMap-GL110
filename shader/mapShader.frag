@@ -18,6 +18,6 @@
 void main(void)
 //-------------
 {
-	//output: the distance of the fragment
-	gl_FragDepth  = gl_FragCoord.z;
+        //output: the distance of the fragment
+        gl_FragDepth  = gl_FragCoord.z;
 }
