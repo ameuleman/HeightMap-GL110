@@ -8,11 +8,7 @@
 *
 *  @brief      Class to display the height map
 *
-*  @version    1.0
-*
-*  @date       17/06/2016
-*
-*  @author     Andréas Meuleman
+*  @author     AndrÃ©as Meuleman
 *******************************************************************************
 */
 
@@ -87,6 +83,17 @@ public:
 	//--------------------------------------------------------------------------	
 	void changeLvlPlanVisibility();
 
+    //--------------------------------------------------------------------------
+    /// Open a dialog to select a directory and save the current rendering
+    //--------------------------------------------------------------------------
+    void saveCurrentRendering();
+
+    //--------------------------------------------------------------------------
+    /// Open a window that describes how to control the display
+    //--------------------------------------------------------------------------
+    void displayHelp();
+
+
 //******************************************************************************
 private:
 	//No copy constructor
@@ -101,22 +108,35 @@ private:
     void wheelEvent(QWheelEvent *wheelEvent);
 
 	//--------------------------------------------------------------------------
-	///event to control the display 
-    ///rotation of the camera thanks to Z, Q, S, D,
-	///Enable/disable lvl plan display: spacebarre
-    ///change the height of the lvl plan: R and F
-	///Rotation of the light source: arrows
+    /// event to control the display
+    /// rotation of the camera thanks to Z, Q, S, D,
+    /// Enable/disable lvl plan display: spacebarre
+    /// change the height of the lvl plan: R and F
+    /// Rotation of the light source: arrows
+    /// Save the current rendering: W
 	//--------------------------------------------------------------------------
 	void keyPressEvent(QKeyEvent *event);
 
     //--------------------------------------------------------------------------
     ///Rotate the camera
+    /**
+    *  @param angle: angle of rotation
+    *  @param x: axis of rotation
+    *  @param y: axis of rotation
+    *  @param z: axis of rotation
+    */
     //--------------------------------------------------------------------------
     void rotateCamera(float angle, float x, float y, float z);
 
 	//--------------------------------------------------------------------------
 	///Rotate the light source and rebuild the shadow
-	//--------------------------------------------------------------------------
+    /**
+    *  @param angle: angle of rotation
+    *  @param x: axis of rotation
+    *  @param y: axis of rotation
+    *  @param z: axis of rotation
+    */
+    //--------------------------------------------------------------------------
 	void rotateLightSource(float angle, float x, float y, float z);
 
 	//--------------------------------------------------------------------------
@@ -164,7 +184,7 @@ private:
     float m_length, //length of the model
         m_width, //width of the model
         m_shadowMatrixSide, //size of the cube that the shadow map take into account
-        m_zoomAngle;
+        m_zoomAngle; //Angle for the view matrix
 
 	bool m_LvlPlanVisibility; //to chose if the lvl plan has to be displayed
 };

@@ -5,11 +5,9 @@
 *
 *  @brief      Class to handel a mesh to displpay it thanks to OpenGL
 *
-*  @version    1.0
-*
 *  @date       23/02/2017
 *
-*  @author     Andréas Meuleman
+*  @author     AndrÃ©as Meuleman
 *******************************************************************************
 */
 
@@ -18,8 +16,8 @@
 //******************************************************************************
 #include <QtGui/QOpenGLShaderProgram>
 #include <cassert>
-#include <iostream>
 #include <math.h>
+#include "ParallelTool.h"
 
 #include "Mesh.h"
 
@@ -57,11 +55,12 @@ void Mesh::initialize()
 {
     m_hasNormalData = (m_verticesNormal.size() > 0);
     m_hasColourData = (m_verticesColour.size() > 0);
-
-    setIndex();
-
+    
+    //Fail if their is nothing to display
     assert(m_verticesPosition.size());
 
+    setIndex();
+    
     initializeOpenGLFunctions();
 
     updateVBO();
@@ -72,20 +71,7 @@ void Mesh::initialize()
 void Mesh::updateVBO()
 //------------------------------------------------------------------------------
 {
-    if(m_isInitialized)
-    {
-        // Cleanup VBO if needed
-        glDeleteBuffers(1, &m_positionBuffer);
-
-        if(m_hasNormalData)
-            glDeleteBuffers(1, &m_normalBuffer);
-
-        if(m_hasColourData)
-            glDeleteBuffers(1, &m_colourBuffer);
-
-        if(m_verticesIndex.size())
-            glDeleteBuffers(1, &m_indexBuffer);
-    }
+    cleanUpVBO();
 
     //Create VBO thanks to the data
     glGenBuffers(1, &m_positionBuffer);
@@ -159,6 +145,7 @@ void Mesh::render()
         glDrawArrays(GL_TRIANGLES, 0, m_verticesCount);
     }
 
+    //Disable 
     glDisableVertexAttribArray(0);
 
     if(m_hasNormalData)
@@ -168,33 +155,6 @@ void Mesh::render()
         glDisableVertexAttribArray(2);
 }
 
-//------------------------------------------------------------------------------
-vector<QVector3D > Mesh::getVerticesPosition() const
-//------------------------------------------------------------------------------
-{
-    return m_verticesPosition;
-}
-
-//------------------------------------------------------------------------------
-vector<QVector3D > Mesh::getVerticesColour() const
-//------------------------------------------------------------------------------
-{
-    return m_verticesColour;
-}
-
-//------------------------------------------------------------------------------
-vector<QVector3D > Mesh::getVerticesNormal() const
-//------------------------------------------------------------------------------
-{
-    return m_verticesNormal;
-}
-
-//------------------------------------------------------------------------------
-unsigned int Mesh::getVerticeCount() const
-//------------------------------------------------------------------------------
-{
-    return m_verticesCount;
-}
 
 //--------------------------------------------------------------------------
 /// Enable to compare two vectors to create a hash table
@@ -255,12 +215,14 @@ void Mesh::setIndex()
     if(!m_usesIndex)
     {
         // Add the vertices to the hash table
-        std::map<QVector3D, VertexData, VectorComparer> hash_table;
+        map<QVector3D, VertexData, VectorComparer> hash_table;
+
+        VertexData *hashTableElement;
 
         //Compute the vertices normal vectors
         //(sum of the adjacent faces normal vectors)
         //and set the hash table
-        for (unsigned int i(0); i < m_verticesCount; ++i)
+        for (unsigned int i(0); i < m_verticesCount; i++)
         {
             QVector3D currentVertex(m_verticesPosition[i]);
             QVector3D normal;
@@ -272,7 +234,7 @@ void Mesh::setIndex()
             if(m_hasColourData)
                 colour = m_verticesColour[i];
 
-            VertexData *hashTableElement(&hash_table[currentVertex]);
+            hashTableElement = (&hash_table[currentVertex]);
 
             hashTableElement->m_normal += normal;
             hashTableElement->m_colour = colour;
@@ -311,10 +273,16 @@ void Mesh::setIndex()
         m_verticesIndex.clear();
         m_verticesIndex.resize(m_verticesCount);
 
-        for (unsigned int i(0); i < m_verticesCount; ++i)
-        {
-            m_verticesIndex[i] = hash_table[m_verticesPosition[i]].m_id;
-        }
+        ParallelTool::performInParallel(
+            [this, &hash_table, &hashTableElement](unsigned int leftIndex, unsigned int rightIndex)
+            {
+            for (unsigned int i(leftIndex); i < rightIndex; i++)
+            {
+                m_verticesIndex[i] = hash_table[m_verticesPosition[i]].m_id;
+            }
+            },
+            0, m_verticesCount);
+
 
         //set the vertices position data
         m_verticesPosition.clear();
@@ -329,4 +297,50 @@ void Mesh::setIndex()
 
         m_usesIndex = true;
     }
+}
+
+void Mesh::cleanUpVBO()
+{
+    if(m_isInitialized)
+    {
+        // Cleanup VBO if needed
+        glDeleteBuffers(1, &m_positionBuffer);
+
+        if(m_hasNormalData)
+            glDeleteBuffers(1, &m_normalBuffer);
+
+        if(m_hasColourData)
+            glDeleteBuffers(1, &m_colourBuffer);
+
+        if(m_verticesIndex.size())
+            glDeleteBuffers(1, &m_indexBuffer);
+    }
+}
+
+//------------------------------------------------------------------------------
+vector<QVector3D > Mesh::getVerticesPosition() const
+//------------------------------------------------------------------------------
+{
+    return m_verticesPosition;
+}
+
+//------------------------------------------------------------------------------
+vector<QVector3D > Mesh::getVerticesColour() const
+//------------------------------------------------------------------------------
+{
+    return m_verticesColour;
+}
+
+//------------------------------------------------------------------------------
+vector<QVector3D > Mesh::getVerticesNormal() const
+//------------------------------------------------------------------------------
+{
+    return m_verticesNormal;
+}
+
+//------------------------------------------------------------------------------
+unsigned int Mesh::getVerticeCount() const
+//------------------------------------------------------------------------------
+{
+    return m_verticesCount;
 }

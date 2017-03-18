@@ -6,13 +6,11 @@
 *
 *  @file       LvlPlan.h
 *
-*  @brief      Class to handel a lvl plan
-*
-*  @version    1.0
+*  @brief      Class to handle a lvl plan to highlight the edges
 *
 *  @date       23/02/2017
 *
-*  @author     Andréas Meuleman
+*  @author     AndrÃ©as Meuleman
 *******************************************************************************
 */
 
@@ -24,7 +22,7 @@
 //==============================================================================
 /**
 *  @class  LvlPlan
-*  @brief  LvlPlan is a class to handel a lvl plan mesh
+*  @brief  LvlPlan is a class to handle a lvl plan mesh  to highlight the edges
 */
 //==============================================================================
 class LvlPlan: public Mesh
@@ -43,9 +41,9 @@ public:
 //******************************************************************************
 private:
 
-    float m_height,
-        m_length,
-        m_width;
+    float m_height, //The height of the lvl plan. Can be seen as a threshold for the edge detection.
+        m_length, //Size of a side of the plan
+        m_width; //Size of the other side
 };
 
 #endif // LVLPLAN_H

@@ -5,11 +5,9 @@
 *
 *  @brief      Class to load a height imageData file to displpay it later thanks to OpenGL
 *
-*  @version    1.0
-*
 *  @date       16/06/2016
 *
-*  @author     Andréas Meuleman
+*  @author     AndrÃ©as Meuleman
 *******************************************************************************
 */
 
@@ -20,6 +18,7 @@
 #include <fstream>
 #include <cassert>
 
+#include "ParallelTool.h"
 #include "HeightMapMesh.h"
 
 //******************************************************************************
@@ -119,13 +118,27 @@ unsigned int HeightMapMesh::getM() const
 void HeightMapMesh::create(vector<vector<float>> const& imageData)
 //------------------------------------------------------------------------------
 {
-    m_verticesPosition.reserve(m_n*m_m*6);
-    m_verticesColour.reserve(m_n*m_m*6);
+    m_verticesCount = (m_n - 1) * (m_m - 1) * 6;
 
-    //multiply the x and y position of each vertex by this value
+    m_verticesNormal.resize(m_verticesCount);
+    m_verticesPosition.resize(m_verticesCount);
+    m_verticesColour.resize(m_verticesCount);
+
     float size(SIDE_FACTOR/(float(max(m_n, m_m))));
 
-    for (unsigned int i(0); i < m_n - 1; i++) {
+    ParallelTool::performInParallel(
+        [this, size, &imageData](unsigned int leftIndex, unsigned int rightIndex)
+        {
+            generateVertices(size, imageData, leftIndex, rightIndex);
+        },
+        0, m_n - 1);
+}
+
+//------------------------------------------------------------------------------
+void HeightMapMesh::generateVertices(float size, vector<vector<float>> const& imageData, unsigned int leftIndex, unsigned int rightIndex)
+//------------------------------------------------------------------------------
+{
+    for (unsigned int i(leftIndex); i < rightIndex; i++) {
         for (unsigned int j(0); j < m_m - 1; j++) {
 
             float x = i * size;
@@ -133,7 +146,7 @@ void HeightMapMesh::create(vector<vector<float>> const& imageData)
             float y = j * size;
             float dy = 1 * size;
 
-			//extract three vertices
+            //extract three vertices
             QVector3D v1(x, y, imageData[i][j] * HEIGHT_FACTOR);
             QVector3D v2(x + dx, y, imageData[i + 1][j] * HEIGHT_FACTOR);
             QVector3D v3(x + dx, y + dy, imageData[i + 1][j + 1] * HEIGHT_FACTOR);
@@ -145,40 +158,41 @@ void HeightMapMesh::create(vector<vector<float>> const& imageData)
             QVector3D c3(imageData[i + 1][j + 1], 0, 1 - imageData[i + 1][j + 1]);
             QVector3D c4(imageData[i][j + 1], 0, 1 - imageData[i][j + 1]);
 
-			//the first triangle
-            m_verticesPosition.push_back(v1);
-            m_verticesPosition.push_back(v2);
-            m_verticesPosition.push_back(v3);
+            int index(6 * (i * (m_m - 1) + j));
+            //the first triangle
+            m_verticesPosition[index] = (v1);
+            m_verticesPosition[index + 1] = (v2);
+            m_verticesPosition[index + 2] = (v3);
 
-            m_verticesColour.push_back(c1);
-            m_verticesColour.push_back(c2);
-            m_verticesColour.push_back(c3);
+            m_verticesColour[index] = (c1);
+            m_verticesColour[index + 1] = (c2);
+            m_verticesColour[index + 2] = (c3);
 
-			//the second triangle
-            m_verticesPosition.push_back(v1);
-            m_verticesPosition.push_back(v3);
-            m_verticesPosition.push_back(v4);
+            //the second triangle
+            m_verticesPosition[index + 3] = (v1);
+            m_verticesPosition[index + 4] = (v3);
+            m_verticesPosition[index + 5] = (v4);
 
-            m_verticesColour.push_back(c1);
-            m_verticesColour.push_back(c3);
-            m_verticesColour.push_back(c4);
+            m_verticesColour[index + 3] = (c1);
+            m_verticesColour[index + 4] = (c3);
+            m_verticesColour[index + 5] = (c4);
 
-			//the order of the vertices is important to calculate the right normal vector
-		}
-	}
+            //the order of the vertices is important to calculate the right normal vector
 
-    m_verticesCount = (unsigned int)(m_verticesPosition.size());
+            //create the normal vector for each triangle
+            QVector3D normal(QVector3D::crossProduct(
+                (v2 - v1),
+                (v3 - v1)));
+            normal.normalize();
+            for (unsigned int l(0); l < 3; l++)
+                m_verticesNormal[index + l] = (normal);
 
-    m_verticesNormal.reserve(m_verticesCount);
-
-	//create the normal vector for each triangle
-    for (unsigned int i(0); i < m_verticesCount; i += 3) {
-        QVector3D normal(QVector3D::crossProduct(
-            (m_verticesPosition[i + 1] - m_verticesPosition[i]),
-            (m_verticesPosition[i + 2] - m_verticesPosition[i])));
-		normal.normalize();
-        for (unsigned int l(0); l < 3; l++) {
-            m_verticesNormal.push_back(normal);
-		}
-	}
+            normal = QVector3D::crossProduct(
+                (v3 - v1),
+                (v4 - v1));
+            normal.normalize();
+            for (unsigned int l(3); l < 6; l++)
+                m_verticesNormal[index + l] = (normal);
+        }
+    }
 }

@@ -5,11 +5,7 @@
 *
 *  @brief      Class to display the height map
 *
-*  @version    1.0
-*
-*  @date       17/06/2016
-*
-*  @author     Andréas Meuleman
+*  @author     AndrÃ©as Meuleman
 *******************************************************************************
 */
 
@@ -20,6 +16,8 @@
 #include <fstream>
 #include <cassert>
 #include <QOpenGLFunctions>
+#include <QString>
+#include <QFileDialog>
 
 #include "RenderWindow.h"
 
@@ -150,18 +148,16 @@ void RenderWindow::initializeGL()
     m_shadowMap.render(m_heightMapMesh, m_shadowMapMatrix, m_depthMapProgram);
 
     //set the projection matrix for the camera to display on the window
-    m_pMatrix.perspective(m_zoomAngle, 4.f / 3.f, 0.1f, m_width+m_length);
+    m_pMatrix.perspective(m_zoomAngle, 16.f / 9.f, 0.1f, m_width+m_length);
 
     //set the view matrix
-    m_eyePos = QVector3D(-(50+m_length/2), -(50+m_width/2), 150.f);
+    m_eyePos = QVector3D((m_length/2), (m_width/2), 250.f);
 
     m_vMatrix.lookAt(
         m_eyePos,
         QVector3D(0.f, 0.f, -40.f),
         QVector3D(0.f, 0.f, 1.f)
         );
-
-    m_vMatrix.rotate(180.f, QVector3D(0.f, 0.f, 1.f));
 
     //set the model matrix, place it in the center
     m_mMatrix.translate(-m_length/2, -m_width/2, 0.f);
@@ -246,6 +242,28 @@ void RenderWindow::changeLvlPlanVisibility()
 }
 
 //------------------------------------------------------------------------------
+void RenderWindow::saveCurrentRendering()
+//------------------------------------------------------------------------------
+{
+    //Make sure the scene is corectly rendered
+    QCoreApplication::postEvent(this, new QEvent(QEvent::UpdateRequest));
+
+    //get the rendering
+    QImage rendering(grabFramebuffer());
+
+    //Chose the name and directory of the file
+    QString fileName = QFileDialog::getSaveFileName(nullptr, "Save current rendering",
+                               "../results/",
+                               "Images (*.png *.xpm *.jpg)");
+
+    //Save the image
+    if(fileName.size())
+    {
+        rendering.save(fileName);
+    }
+}
+
+//------------------------------------------------------------------------------
 void RenderWindow::wheelEvent(QWheelEvent *wheelEvent)
 //------------------------------------------------------------------------------
 {
@@ -296,11 +314,15 @@ void RenderWindow::keyPressEvent(QKeyEvent *event)
 
     //Z, S, Q, D rotate the camera
     case Qt::Key_D:
+    {
         rotateCamera(-2, 0, 0, 1);
+    }
     break;
 
     case Qt::Key_Q:
+    {
         rotateCamera(2, 0, 0, 1);
+    }
     break;
 
     case Qt::Key_Z:
@@ -326,11 +348,15 @@ void RenderWindow::keyPressEvent(QKeyEvent *event)
 
     // Arrows move the light source
     case Qt::Key_Right:
+    {
         rotateLightSource(-2, 0, 0, 1);
+    }
     break;
 
     case Qt::Key_Left:
+    {
         rotateLightSource(2, 0, 0, 1);
+    }
     break;
 
     case Qt::Key_Up:
@@ -348,6 +374,13 @@ void RenderWindow::keyPressEvent(QKeyEvent *event)
         QVector3D axis(QVector3D::crossProduct(m_lightDir, vertical));
         if((axis.length() > 0.1) || (QVector3D::dotProduct(m_lightDir, vertical) > 0))
             rotateLightSource(-2, axis.x(), axis.y(), axis.z());
+    }
+    break;
+
+    //W save the current rendering
+    case Qt::Key_W:
+    {
+        saveCurrentRendering();
     }
     break;
 
@@ -374,8 +407,6 @@ void RenderWindow::rotateCamera(float angle, float x, float y, float z)
         QVector3D(0.f, 0.f, -40.f),
         QVector3D(0.f, 0.f, 1.f)
         );
-
-    m_vMatrix.rotate(180.f, QVector3D(0.f, 0.f, 1.f));
 
     QCoreApplication::postEvent(this, new QEvent(QEvent::UpdateRequest));
 }
@@ -424,3 +455,4 @@ string RenderWindow::readShaderFile(string const& shaderFileName)
     shaderFile.close();
     return source;
 }
+

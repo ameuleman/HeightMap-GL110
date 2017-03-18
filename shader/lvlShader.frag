@@ -1,6 +1,23 @@
+//******************************************************************************
+//      OpenGL 2.0
+//******************************************************************************
 #version 110
 
-void main() {
-	//Output: all has the same color
-        gl_FragColor = vec4(0.2,0,0.3,0.5);
+/**
+*******************************************************************************
+*
+*  @file       lvlShader.frag
+*
+*  @brief      fragment shader to display the transparant lvl plan without shading
+*
+*  @author     Andréas Meuleman
+*******************************************************************************
+*/
+
+//---------
+void main()
+//---------
+{
+        //Output: always the same color
+        gl_FragColor = vec4(0.5, 0.5, 0.5, 0.8);
 }

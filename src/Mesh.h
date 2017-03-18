@@ -8,11 +8,9 @@
 *
 *  @brief      Class to handel a mesh to displpay it thanks to OpenGL
 *
-*  @version    1.0
-*
 *  @date       23/02/2017
 *
-*  @author     Andréas Meuleman
+*  @author     AndrÃ©as Meuleman
 *******************************************************************************
 */
 
@@ -22,6 +20,7 @@
 #include <QVector3D>
 #include <vector>
 #include <QOpenGLFunctions>
+#include <atomic>
 
 
 //******************************************************************************
@@ -63,6 +62,11 @@ public:
     /// Do nothing if an index has already been set.
     //--------------------------------------------------------------------------
     void setIndex();
+
+    //--------------------------------------------------------------------------
+    /// Clean up VBO if needed
+    //--------------------------------------------------------------------------
+    void cleanUpVBO();
 
     //getters
     vector<QVector3D > getVerticesPosition() const;
