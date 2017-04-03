@@ -62,13 +62,13 @@ void MainWindow::on_choseImageButton_clicked()
 
 void MainWindow::launchRenderWindow(QString const& windowName, image_matrix const& imageData)
 {
-	//Use pointer to avoid deletion after the end of the function
-	RenderWindow *renderWindow(new RenderWindow(imageData,
-							  m_imageProcessor.getN(), m_imageProcessor.getM()));
+    //Use pointer to avoid deletion after the end of the function
+    RenderWindow *renderWindow(new RenderWindow(imageData,
+                              m_imageProcessor.getN(), m_imageProcessor.getM()));
 
-	renderWindow->setTitle(windowName);
-	renderWindow->resize(800, 450);
-	renderWindow->show();
+    renderWindow->setTitle(windowName);
+    renderWindow->resize(800, 450);
+    renderWindow->show();
 }
 
 void MainWindow::updateImageProcessor()
