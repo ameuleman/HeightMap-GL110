@@ -60,15 +60,37 @@ void MainWindow::on_choseImageButton_clicked()
 	}
 }
 
+
+
+void MainWindow::on_useIndexButton_clicked()
+{
+    if(m_useIndex)
+    {
+        m_useIndex = false;
+		ui->useIndexButton->setText("Use index");
+    }
+	else
+	{
+		m_useIndex = true;
+		ui->useIndexButton->setText("do not use index");
+	}
+}
+
+
 void MainWindow::launchRenderWindow(QString const& windowName, image_matrix const& imageData)
 {
-    //Use pointer to avoid deletion after the end of the function
-    RenderWindow *renderWindow(new RenderWindow(imageData,
-                              m_imageProcessor.getN(), m_imageProcessor.getM()));
+	QSurfaceFormat format;
+	format.setDepthBufferSize(24);
 
+	//Use pointer to avoid deletion after the end of the function
+	RenderWindow *renderWindow(new RenderWindow(imageData,
+								m_imageProcessor.getN(), m_imageProcessor.getM(),
+								m_useIndex));
+
+	renderWindow->setFormat(format);
     renderWindow->setTitle(windowName);
-    renderWindow->resize(800, 450);
-    renderWindow->show();
+	renderWindow->resize(800, 450);
+	renderWindow->show();
 }
 
 void MainWindow::updateImageProcessor()
@@ -97,4 +119,3 @@ void MainWindow::updateImageProcessor()
 
 
 }
-

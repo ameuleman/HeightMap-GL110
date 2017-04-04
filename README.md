@@ -14,5 +14,3 @@ It is also possible to save the displayed image.
 The project requires ***C++11***, ***OpenGL 2.0***, ***Qt 5.6*** and ***QtCreator 4*** or later.
 
 To launch it, open ***src/heightMapQt.pro*** with QtCreator.
-
-To control the display, use **ZQSD** to rotate the model, **arrows** to rotate the light source, **space bar** to make the plan appear or disappear, **RF** to raise or lower it and **W** to save the current rendering as an image.
