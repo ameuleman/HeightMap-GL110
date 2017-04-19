@@ -1,3 +1,4 @@
+
 #ifndef HEIGHTMAPMESH_H
 #define HEIGHTMAPMESH_H
 
@@ -6,13 +7,10 @@
 *
 *  @file       HeightMapMesh.h
 *
-*  @brief      Class to create a height map mesh thanks to a file or data
-*               to displpay it thanks to OpenGL
-*
-*  @author     Andréas Meuleman
+*  @brief      Classe permettant de créer  un modèle pour une carte de niveau
+*	à patir d'un fichier ou de données pour l'afficher avec OpenGL
 *******************************************************************************
 */
-
 
 //******************************************************************************
 //  Include
@@ -27,36 +25,40 @@
 //==============================================================================
 /**
 *  @class  HeightMapMesh
-*  @brief  HeightMapMesh is a class to create a height map mesh thanks to a file or data
-*               to displpay it thanks to OpenGL
+*  @brief  Classe permettant de créer  un modèle pour une carte de niveau
+*	à patir d'un fichier ou de données pour l'afficher avec OpenGL
 */
 //==============================================================================
 class HeightMapMesh: public Mesh{
 public:
 
-	//--------------------------------------------------------------------------
-	/// Overloaded constructor with the name of the file. The file has to contain
-	/// the width, the height and then the data in the [0,1] range
 	/**
-	*  @param fileName: the name of the height map file
-	*/
-	//--------------------------------------------------------------------------
+	 * @brief HeightMapMesh Constructeur surcharché avec le nom du fichier.
+	 * Le fichier doit contenir la largeur, la hauteur et les données dans l'indervalle [0,1]
+	 * @param fileName le nom du fichier de données
+	 */
 	HeightMapMesh(std::string const& fileName);
 
-	//--------------------------------------------------------------------------
-	/// Overloaded constructor with the image size and data
 	/**
-	*  @param imageData: the data of the image as floats in the [0,1] range
-	*  @param n: height of the image
-	*  @param m: width of the image
-	*/
-	//--------------------------------------------------------------------------
+	 * @brief HeightMapMesh Constructeur surchargé avec les données et la taille de la carte de niveau
+	 * @param imageData données de la carte de niveau dans l'intervalle [0,1]
+	 * @param n hauteur de la carte de niveau
+	 * @param m largeur de la carte de niveau
+	 */
 	HeightMapMesh(std::vector<std::vector<float>> const& imageData, unsigned int n, unsigned int m);
 
 	virtual ~HeightMapMesh();
 
-	//Calculate and get the size of the sides of the heightmap's mesh
+	/**
+	 * @brief getLength calcule la longueur du modèle de la carte de niveau
+	 * @return la longueur du modèle de la carte de niveau
+	 */
 	float getLength() const;
+
+	/**
+	 * @brief getWidth calcule la largeur du modèle de la carte de niveau
+	 * @return la largeur du modèle de la carte de niveau
+	 */
 	float getWidth() const;
 
 	//Getters
@@ -65,32 +67,29 @@ public:
 
 //******************************************************************************
 private:
-	//No default constructor
+	//Pas de constructeur par défaut
 	HeightMapMesh();
 
-	//--------------------------------------------------------------------------
-	///Create the mesh
 	/**
-	*  @param imageData: the data of the image as floats in the [0,1] range
-	*/
-	//--------------------------------------------------------------------------
+	 * @brief create crée le modèle
+	 * @param imageData les données dans l'intervalle [0,1]
+	 */
 	void create(std::vector<std::vector<float>> const& imageData);
 
-	//--------------------------------------------------------------------------
-	///translate the vector read into three vector<QVector3D>
-	///that can be exploited by the rendering window (position, colour and normal vectors)
-	/// Proceed between two values to enable parallel processing
 	/**
-	* @param imageData: the data of the image as floats in the [0,1] range
-	* @param leftIndex: proceed from this index
-	* @param rightIndex: to this index
-	*/
-	//--------------------------------------------------------------------------
+	 * @brief transforme le vecteur de données en trois vector<QVector3D>
+	 * qui pourront être utilisés par la fenêtre de rendu (position, couleur and vecteurs normaux)
+	 * Les bornes permettent de traîter le tableau en parallèle
+	 * @param size multiplie la position de tous les points par cette valeur
+	 * @param imageData données de la carte de niveau dans l'intervalle [0,1]
+	 * @param leftIndex traitement à partir de cet index
+	 * @param rightIndex jusqu'à cet index
+	 */
 	void generateVertices(float size, std::vector<std::vector<float>> const& imageData,
 						  unsigned int leftIndex, unsigned int rightIndex);
 
-	unsigned int m_n, //number of rows
-		m_m; //number of columns
+	unsigned int m_n, //nombre de lignes
+		m_m; //nombre de colomnes
 };
 
 #endif //HEIGHTMAPMESH_H

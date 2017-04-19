@@ -6,11 +6,11 @@
 *
 *  @file       DepthMap.h
 *
-*  @brief      Class to render to a buffer in order to create, for exemple, a shadow map.
-*
-*  @author     Andréas Meuleman
+*  @brief      Classe permettant de rendre un modèle à un buffer afin
+*			de créer, par exemple, une shadow map.
 *******************************************************************************
 */
+
 
 //******************************************************************************
 //  Include
@@ -26,7 +26,8 @@
 //==============================================================================
 /**
 *  @class  DepthMap
-*  @brief  DepthMap is a class to render to a buffer in order to create, for exemple, a shadow map.
+*  @brief  La classe DepthMap permet de rendre un modèle vers un buffer afin
+*			de créer, par exemple, une shadow map
 */
 //==============================================================================
 class DepthMap: protected QOpenGLFunctions {
@@ -36,41 +37,41 @@ public:
 
 	~DepthMap();
 
-	//--------------------------------------------------------------------------
-	///Initialize the buffers
-	//--------------------------------------------------------------------------
+	/**
+	 * @brief initialize Initialise le buffer
+	 */
 	void initialize();
 
-	//--------------------------------------------------------------------------
-	///render to the frame buffer, call initialize() if it has never been called before
 	/**
-	*  @param mesh: the mesh to be rendered
-	*  @param matrix: the projection matrix
-	*  @param program: the OpenGL shader program to create the depth map
-	*/
-	//--------------------------------------------------------------------------
+	 * @brief render rend vers le frame buffer,
+	 * appel initialize() si elle n'a jamais été appelée auparavant
+	 * @param mesh le modèle à rendre
+	 * @param matrix la matrice de projection
+	 * @param program le programme de shader OpenGL pour créer la depth map
+	 */
 	void render(Mesh &mesh, QMatrix4x4 const& matrix,
 				std::unique_ptr<QOpenGLShaderProgram> const& program);
 
-	//--------------------------------------------------------------------------
-	///Get the texture
-	//--------------------------------------------------------------------------
+	/**
+	 * @brief getMapTexture
+	 * @return La texture correspondant au rendu
+	 */
 	GLuint getMapTexture() const;
 
 //******************************************************************************
 private:
-	//No copy constructor
+	//pas de constructeur par copie
 	DepthMap(DepthMap const&);
 
-	bool m_isInitialized;//to know if initialize() has been called
+	//pour savoir si initialize() a déjà été appelé
+	bool m_isInitialized;
 
-	//IDs for inputs in the map program
-	GLuint m_matrixID; //ID of the MVP matrix
+	//ID de la MVP dans le programme de shader
+	GLuint m_matrixID;
 
-	//To create a buffer for the scene map
+	//framebufer et texture pour stocker le rendu
 	GLuint	m_mapFrameBuffer,
 		m_mapTexture;
-
 };
 
 #endif //DEPTHMAP_H
