@@ -1,23 +1,23 @@
 # HeightMap
 
 ## Description
-The program loads a black and white image and perform edge detection thanks to Canny algorithm. Then it converts the original image, the processed one and the intermediate steps as height maps to display them using OpenGL. 
+Le programme lit une image en noir et blanc et effectue un traitement de détection de contours grâce à l'algorithme de Canny. puis de convertir cette image ainsi que les étapes menant au résultat en cartes de niveau afin de les afficher en 3D grâce à OpenGL. 
 
-It is possible to activate a plan that enables to highlight edges over a threshold. 
+Il est possible d'afficher un plan pour souligner les coutours au dessus d'un certains seuil. 
 
-Shadows, diffuse and specular lightings are simulated for a better rendering.
+Lors de l'affichage, le programme simule des effets d'ombres, d'éclairage diffus et spéculaire.
 
-It is also possible to save the displayed image.
+Il est aussi possible d'enregistrer l'image rendu.
 
 
 ## Instructions
-The project requires a ***C++11*** capable compiler, ***OpenGL 3.3***, ***Qt 5.6*** and ***QtCreator 4*** or later.
+Le projet nécessite un compilateur ***C++11***, ***OpenGL 2.0***, ***Qt 5.6*** et ***QtCreator 4*** ou plus récent.
 
-To launch it, open ***src/heightMapQt.pro*** with QtCreator.
+Pour le lancer, ouvrir ***src/heightMapQt.pro*** avec QtCreator.
 
 ## Results
 ![raw](/results/city_raw.png)
-*Height map corresponding to the original image*
+*Carte de niveau correspondant à l'image originale*
 
 ![Canny](/results/city_canny.png)
-*Height map corresponding to the Canny image with a plan to hightlight edges*
+*Carte de niveau correspondant à l'image après traitement, avec un plan pour souligner les contours*
