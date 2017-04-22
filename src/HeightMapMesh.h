@@ -70,6 +70,9 @@ private:
 	//Pas de constructeur par défaut
 	HeightMapMesh();
 
+	//Pas de constructeur par copie
+	HeightMapMesh(HeightMapMesh const&);
+
 	/**
 	 * @brief create crée le modèle
 	 * @param imageData les données dans l'intervalle [0,1]
