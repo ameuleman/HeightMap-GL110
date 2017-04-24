@@ -3,10 +3,13 @@
 
 /**
 *******************************************************************************
+*
 *  @file       ImageProcessor.h
 *
-*  @brief      Classe permettant de lire une image en niveau de gris et d'effectuer un traitement.
-*  Utilise l'algorithme de Canny pour la détection de contours et stock les étapes intermédiaires.
+*  @brief      Class to load an image and process it.
+*               Uses Canny's algorithm to perform edge detection.
+*
+*  @author     Andréas Meuleman
 *******************************************************************************
 */
 
@@ -17,143 +20,136 @@
 #include <QVector2D>
 #include <QImage>
 
-
-//******************************************************************************
-//  Type definition
-//******************************************************************************
-typedef std::vector<float> float_line;
-typedef std::vector<float_line> image_matrix;
+#include "Types.h"
 
 //==============================================================================
 /**
 *  @class  ImageProcessor
-*  @brief  ImageProcessor Classe permettant de lire une image en niveau de gris
-* et d'effectuer un traitement.
-* Utilise l'algorithme de Canny pour la détection de contours
-* et stock les étapes intermédiaires.
+*  @brief  ImageProcessor is Class to load an image and process it.
+*               Uses Canny's algorithm to perform edge detection.
 */
 //==============================================================================
 class ImageProcessor
 {
 public:
 	/**
-	 * @brief ImageProcessor constructeur surchargé avec le nom du fichier à lire
-	 * Lit le fichier puis effectue le traitement
-	 * @param fileName nom de l'image à lire
+	 * @brief ImageProcessor Overloaded constructor with the name of the image file
+	 * Load the file and perform the procesing
+	 * @param fileName the name of the height map file
 	 * @throws
 	 */
 	ImageProcessor(std::string const& fileName);
 
 	/**
-	 * @brief ImageProcessor constructeur par défaut, cré un ImageProcessor vide
+	 * @brief ImageProcessor default constructor, create an empty image processor
 	 */
 	ImageProcessor();
 
 	/**
-	 * @brief loadData Charge le fichier en le stockant en tant que image_matrix
-	 * @param fileName nom de l'image à lire
+	 * @brief loadData Load the file and store it as vector<vector<float>>
+	 * @param fileName the name of the height map file
 	 * @throws
 	 */
 	void loadData(std::string const& fileName);
 
 	/**
-	 * @brief processImage applique l'algorithme de Canny et stock les étapes intermédiaires.
+	 * @brief processImage Apply Canny algorithm and store the intermediate steps
 	 * @throws
 	 */
 	void processImage();
 
 	/**
-	 * @brief getRawData récupère les données correspondant à une image
-	 * @return données avant le traitement
+	 * @brief getRawData get data corresponding to an image
+	 * @return data before processing
 	 */
-	image_matrix getRawData() const;
+	Types::float_matrix getRawData() const;
 
 	/**
-	 * @brief getSmoothedData récupère les données correspondant à une image
-	 * @return données après filtrage linéaire
+	 * @brief getSmoothedData get data corresponding to an image
+	 * @return data after linear filtering
 	 */
-	image_matrix getSmoothedData() const;
+	Types::float_matrix getSmoothedData() const;
 
 	/**
-	 * @brief getGradientData récupère les données correspondant à une image
-	 * @return la norme du gradient sur chaque pixel
+	 * @brief getGradientData get data corresponding to an image
+	 * @return gradient norm for each pixel
 	 */
-	image_matrix getGradientData() const;
+	Types::float_matrix getGradientData() const;
 
 	/**
-	 * @brief getCannyData récupère les données correspondant à une image
-	 * @return données issues de l'algorithme de Canny
+	 * @brief getCannyData get data corresponding to an image
+	 * @return data after Canny  algorithm
 	 */
-	image_matrix getCannyData() const;
+	Types::float_matrix getCannyData() const;
 
 	/**
-	 * @brief getM Récupère la taille de l'image
-	 * @return nombre de colomnes
+	 * @brief getM get the size of the image
+	 * @return number of columns
 	 */
 	unsigned int getM() const;
 
 	/**
-	 * @brief getN Récupère la taille de l'image
-	 * @return nombre de lignes
+	 * @brief getN get the size of the image
+	 * @return number of rows
 	 */
 	unsigned int getN() const;
 
 //******************************************************************************
 private:
 	/**
-	 * @brief obtainLowerIndices enlève un à chaque index en l'entrée si possible
-	 * @param i le premier index
-	 * @param j le second index
-	 * @return la paire d'indices moins un si au dessus de 0
+	 * @brief obtainLowerIndices retrieve one to each index of the input if possible
+	 * @param i the first index
+	 * @param j the second index
+	 * @return the pair of indices minus 1 and clamp the result above 0
 	 */
 	std::pair<int, int> obtainLowerIndices(int i, int j);
 
 	/**
-	 * @brief obtainUpperIndices ajoute un à chaque index en l'entrée si possible
-	 * @param i le premier index
-	 * @param j le second index
-	 * @return la paire d'indices plus un si n dessous de la taille des données
+	 * @brief obtainUpperIndices add one to each index of the input if possible
+	 * @param i the first index
+	 * @param j the second index
+	 * @return the pair of indices plus 1 and clamp the result below the size of the data
 	 */
 	std::pair<int, int> obtainUpperIndices(int i, int j);
 
 	/**
-	 * @brief applyLinearFilter applique un filtre linéaire sur les données originales
-	 * et crée les données lissées m_smoothedData
-	 * Les bornes permettent de traîter le tableau en parallèle
-	 * @param linearFilter le filtre linéaire à appliquer
-	 * @param leftIndex traitement à partir de cet index
-	 * @param rightIndex jusqu'à cet index
+	 * @brief applyLinearFilter Apply a linear filter on the raw data
+	 * and produce the smoother preprocessed data m_smoothedData
+	 * Proceed between two values to enable parallel processing
+	 * @param linearFilter the linear filter to apply
+	 * @param leftIndex proceed from this index
+	 * @param rightIndex to this index
 	 */
-	void applyLinearFilter(image_matrix const& linearFilter,
+	void applyLinearFilter(Types::float_matrix const& linearFilter,
 						   unsigned int leftIndex, unsigned int rightIndex);
 
 	/**
-	 * @brief applyGradientNorm Calcule la norme du gradient pour chaque pixel
-	 * et le stock dans m_gradientData. Stock ausi les angles des gradients dans m_gradientsAngles
-	 * Les bornes permettent de traîter le tableau en parallèle
-	 * @param leftIndex traitement à partir de cet index
-	 * @param rightIndex jusqu'à cet index
+	 * @brief applyGradientNorm Calculate the gradient and its norm for each pixel
+	 * and store it in m_gradientData. Also store gradients angles in m_gradientsAngles
+	 * Proceed between two values to enable parallel processing
+	 * @param leftIndex
+	 * @param rightIndex
 	 */
 	void applyGradientNorm(unsigned int leftIndex, unsigned int rightIndex);
 
 	/**
-	 * @brief applyCannyAlgorithm Applique l'algorithm de Canny et stock le résultat dans m_cannyData
-	 * Les bornes permettent de traîter le tableau en parallèle
-	 * @param leftIndex traitement à partir de cet index
-	 * @param rightIndex jusqu'à cet index
+	 * @brief applyCannyAlgorithm Apply Canny algorithm and store it in m_cannyData
+	 * Proceed between two values to enable parallel processing
+	 * @param leftIndex proceed from this index
+	 * @param rightIndex to this index
 	 */
 	void applyCannyAlgorithm(unsigned int leftIndex, unsigned int rightIndex);
 
-	image_matrix m_rawData, //Données avant le traitement
-		m_smoothedData, //données après filtrage linéaire
-		m_gradientData, //la norme du gradient sur chaque pixel
-		m_cannyData; //données issues de l'algorithme de Canny
+	Types::float_matrix m_rawData, //Data before processing
+		m_smoothedData, //Data after the first step of the processing: the linear filtering
+		m_gradientData, //Data after gradient processing
+		m_cannyData; //Data after edge detection using Canny algorithm
 
-	//les angles des gradients
-	image_matrix m_gradientsAngles;
+	//Save all the gradients angles to apply Canny Algorithm
+	Types::float_matrix m_gradientsAngles;
 
-	unsigned int m_m, //nombre de colomnes
-		m_n; //,ombre de lignes
+	unsigned int m_m, //number of columns
+		m_n; //number of rows
 };
 
 #endif // IMAGEPROCESSOR_H

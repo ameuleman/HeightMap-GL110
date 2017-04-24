@@ -3,9 +3,12 @@
 
 /**
 *******************************************************************************
+*
 *  @file       LvlPlan.h
 *
-*  @brief      Classe servant de modèle de plan afin de souligner les contours
+*  @brief      Class to handle a lvl plan to highlight the edges
+*
+*  @author     Andréas Meuleman
 *******************************************************************************
 */
 
@@ -17,29 +20,23 @@
 //==============================================================================
 /**
 *  @class  LvlPlan
-*  @brief  LvlPlan Classe servant de modèle de plan afin de souligner les contours
+*  @brief  LvlPlan is a class to handle a lvl plan mesh  to highlight the edges
 */
 //==============================================================================
 class LvlPlan: public Mesh
 {
 public:
-	/**
-	 * @brief LvlPlan constructeur surchargé avec ses dimentions
-	 * @param height la hauteur
-	 * @param length la longueur
-	 * @param width la largeur
-	 */
 	LvlPlan(float height, float length, float width);
 
 	/**
-	 * @brief changeHeight Change la hauteur du plan
-	 * @param delta ajoute cette valeur à la hauteur du plan
+	 * @brief changeHeight  Change the height of the lvl plan
+	 * @param delta add this value to the height of the plan
 	 */
 	void changeHeight(float delta);
 
 //******************************************************************************
 private:
-	//Pas de constructeur par défaut
+	//No default constructor
 	LvlPlan();
 
 	float m_height, //The height of the lvl plan. Can be seen as a threshold for the edge detection.

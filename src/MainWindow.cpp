@@ -76,9 +76,9 @@ void MainWindow::on_choseImageButton_clicked()
 //------------------------------------------------------------------------------
 {
 	//Chose the name and directory of the file
-	QString fileName = QFileDialog::getOpenFileName(nullptr, "Open image file",
+	QString fileName(QFileDialog::getOpenFileName(nullptr, "Open image file",
 							   "../data/",
-							   "Images (*.png *.xpm *.jpg)");
+							   "Images (*.png *.xpm *.jpg)"));
 
 	if(fileName.size())
 	{
@@ -111,7 +111,7 @@ void MainWindow::on_useIndexButton_clicked()
 
 
 //------------------------------------------------------------------------------
-void MainWindow::launchRenderWindow(QString const& windowName, image_matrix const& imageData)
+void MainWindow::launchRenderWindow(QString const& windowName, const Types::float_matrix &imageData)
 //------------------------------------------------------------------------------
 {
 	//set the size of the depth buffer
@@ -158,6 +158,4 @@ void MainWindow::updateImageProcessor()
 		ui->errorText->setText(e.what());
 		std::cerr << "ERROR : " << e.what() << std::endl;
 	}
-
-
 }
