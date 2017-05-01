@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent):
 
 	updateImageProcessor();
 
-	setWindowTitle("Control panel");
+    setWindowTitle("Control panel");
 }
 
 //------------------------------------------------------------------------------
@@ -76,9 +76,9 @@ void MainWindow::on_choseImageButton_clicked()
 //------------------------------------------------------------------------------
 {
 	//Chose the name and directory of the file
-	QString fileName(QFileDialog::getOpenFileName(nullptr, "Open image file",
-							   "../data/",
-							   "Images (*.png *.xpm *.jpg)"));
+	QString fileName = QFileDialog::getOpenFileName(nullptr, "Open image file",
+                               QCoreApplication::applicationDirPath() + "/resources/data/",
+                               "Images (*.png *.xpm *.jpg)");
 
 	if(fileName.size())
 	{
@@ -158,4 +158,6 @@ void MainWindow::updateImageProcessor()
 		ui->errorText->setText(e.what());
 		std::cerr << "ERROR : " << e.what() << std::endl;
 	}
+
+
 }
