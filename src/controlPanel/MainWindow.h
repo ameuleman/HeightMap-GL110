@@ -79,8 +79,7 @@ private:
 	 * @brief m_imageFile name of the image file.
 	 * @default "../data/data.png"
 	 */
-    std::string m_imageFile = (QCoreApplication::applicationDirPath() +
-                               "/resources/data/data.png").toUtf8().data();
+    std::string m_imageFile = (":/data/data.png");
 
 	//To know if the index needs to be set
     bool m_useIndex = true;

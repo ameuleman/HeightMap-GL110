@@ -3,7 +3,6 @@
 
 #include <QString>
 #include <QtTest>
-//#include "HeightMapMesh.h"
 
 class TestHeightMapMesh : public QObject
 {
