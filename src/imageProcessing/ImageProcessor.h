@@ -4,12 +4,12 @@
 /**
 *******************************************************************************
 *
-*  @file       ImageProcessor.h
+*  @file	ImageProcessor.h
 *
-*  @brief      Class to load an image and process it.
-*               Uses Canny's algorithm to perform edge detection.
+*  @brief	Class to load an image and process it.
+*			Uses Canny's algorithm to perform edge detection.
 *
-*  @author     Andréas Meuleman
+*  @author	Andréas Meuleman
 *******************************************************************************
 */
 
@@ -26,7 +26,7 @@
 /**
 *  @class  ImageProcessor
 *  @brief  ImageProcessor is Class to load an image and process it.
-*               Uses Canny's algorithm to perform edge detection.
+*			Uses Canny's algorithm to perform edge detection.
 */
 //==============================================================================
 class ImageProcessor

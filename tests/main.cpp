@@ -4,14 +4,15 @@
 
 int main(int argc, char *argv[])
 {
-    TestImageProcessor testImageProcessor ;
-    QTest::qExec (&testImageProcessor, argc, argv);
+	//Execute all tests
+	TestImageProcessor testImageProcessor ;
+	QTest::qExec(&testImageProcessor, argc, argv);
 
 	TestHeightMapMesh testHeightMapMesh ;
-	QTest::qExec (&testHeightMapMesh, argc, argv);
+	QTest::qExec(&testHeightMapMesh, argc, argv);
 
 	TestLvlPlanMesh testLvlPlanMesh ;
-	QTest::qExec (&testLvlPlanMesh, argc, argv);
+	QTest::qExec(&testLvlPlanMesh, argc, argv);
 
-    return 0;
+	return 0;
 }

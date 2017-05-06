@@ -1,11 +1,11 @@
 /**
 *******************************************************************************
 *
-*  @file       ImageProcessor.cpp
+*  @file	ImageProcessor.cpp
 *
-*  @brief      Class to load an image and process it
+*  @brief	Class to load an image and process it
 *
-*  @author     Andréas Meuleman
+*  @author	Andréas Meuleman
 *******************************************************************************
 */
 

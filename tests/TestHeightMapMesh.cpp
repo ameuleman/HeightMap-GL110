@@ -5,7 +5,22 @@ TestHeightMapMesh::TestHeightMapMesh()
 
 }
 
-void TestHeightMapMesh::testCase1()
+void TestHeightMapMesh::testNoDataCase()
+{
+	QVERIFY2(true, "Failure");
+}
+
+void TestHeightMapMesh::testZerosCase()
+{
+	QVERIFY2(true, "Failure");
+}
+
+void TestHeightMapMesh::testOnesCase()
+{
+	QVERIFY2(true, "Failure");
+}
+
+void TestHeightMapMesh::testUsualCase()
 {
 	QVERIFY2(true, "Failure");
 }
