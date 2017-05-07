@@ -21,8 +21,6 @@
 #include <QString>
 #include <QtTest>
 
-#include "rendering/HeightMapMesh.h"
-
 //==============================================================================
 /**
 *  @class  TestHeightMapMesh
@@ -40,11 +38,15 @@ public:
 
 private Q_SLOTS:
 	/**
-	 * @brief testNoDataCase Test the construction
-	 * of the height map mesh with empty data
-	 * Test indexing as well
+	 * @brief testNoDataErrorCase check if the exception is thrown when their is no input data
 	 */
-	void testNoDataCase();
+	void testNoDataErrorCase();
+
+	/**
+	 * @brief wrongDimensionErrorCase check if the exception is thrown when
+	 * the specified sizes does not correspond to input data
+	 */
+	void wrongDimensionErrorCase();
 
 	/**
 	 * @brief testZerosCase Test the construction of the height map mesh

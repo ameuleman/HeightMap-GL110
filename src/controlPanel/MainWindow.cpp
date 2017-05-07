@@ -121,14 +121,23 @@ void MainWindow::launchRenderWindow(QString const& windowName, const Types::floa
 	format.setDepthBufferSize(24);
 
 	//Use regular pointer to avoid deletion after the end of the function
-	RenderWindow *renderWindow(new RenderWindow(imageData,
+	try
+	{
+		RenderWindow *renderWindow(new RenderWindow(imageData,
 								m_imageProcessor.getN(), m_imageProcessor.getM(),
 								m_useIndex));
 
-	renderWindow->setFormat(format);
-    renderWindow->setTitle(windowName);
-	renderWindow->resize(800, 450);
-	renderWindow->show();
+		renderWindow->setFormat(format);
+		renderWindow->setTitle(windowName);
+		renderWindow->resize(800, 450);
+		renderWindow->show();
+	}
+	catch(std::exception const& e)
+	{
+		//display the error message
+		ui->errorText->setText(e.what());
+		std::cerr << "ERROR : " << e.what() << std::endl;
+	}
 }
 
 //------------------------------------------------------------------------------

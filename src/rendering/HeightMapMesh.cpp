@@ -62,14 +62,7 @@ HeightMapMesh::HeightMapMesh(std::string const& fileName)
 
 	//create m_verticesPosition, m_verticesColour, m_verticesNormal
 	//and m_verticesCount thanks to the data
-	try
-	{
-		create(imageData);
-	}
-	catch(std::exception const& e)
-	{
-		std::cerr << "ERROR : " << e.what() << std::endl;
-	}
+	create(imageData);
 }
 
 //------------------------------------------------------------------------------
@@ -82,14 +75,7 @@ HeightMapMesh::HeightMapMesh(Types::float_matrix const& imageData,
 {
 	//create m_verticesPosition, m_verticesColour, m_verticesNormal
 	//and m_verticesCount thanks to the data
-	try
-	{
-		create(imageData);
-	}
-	catch(std::exception const& e)
-	{
-		std::cerr << "ERROR : " << e.what() << std::endl;
-	}
+	create(imageData);
 }
 
 //------------------------------------------------------------------------------
