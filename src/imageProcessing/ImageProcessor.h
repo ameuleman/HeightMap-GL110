@@ -61,13 +61,17 @@ public:
 	/**
 	 * @brief setRawData Set the raw data of the imageProcessor and call processImage
 	 * to apply Canny algorithm and update all the atributes
-	 * @param imageData
+	 * @param imageData Data to be treated, should be in the [0,1] range
+	 * @param n number of columns
+	 * @param m number of rows
 	 */
-	void setRawData(Types::float_matrix const & imageData);
+	void setRawData(Types::float_matrix const & imageData,
+					unsigned int n, unsigned int m);
 
 	/**
 	 * @brief getRawData get data corresponding to an image
 	 * @return data before processing
+	 * @throws
 	 */
 	Types::float_matrix getRawData() const;
 

@@ -44,7 +44,7 @@ private Q_SLOTS:
 
 	/**
 	 * @brief wrongDimensionErrorCase check if the exception is thrown when
-	 * the specified sizes does not correspond to input data
+	 * the specified sizes do not correspond to input data
 	 */
 	void wrongDimensionErrorCase();
 
@@ -61,14 +61,6 @@ private Q_SLOTS:
 	 * Test indexing as well
 	 */
 	void testOnesCase();
-
-	/**
-	 * @brief testUsualCase Test the construction of the height map mesh
-	 * with data that does not correspond to a corner case
-	 * Test indexing as well
-	 */
-	void testUsualCase();
-
 };
 
 #endif // TESTHEIGHTMAPMESH_H
