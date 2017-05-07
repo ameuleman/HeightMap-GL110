@@ -1,10 +1,22 @@
+/**
+*******************************************************************************
+*  @file       main.cpp
+*
+*  @brief      Execute all unit tests
+*
+*  @author     Andréas Meuleman
+*******************************************************************************
+*/
+
+//******************************************************************************
+// Include
+//******************************************************************************
 #include "TestImageProcessor.h"
 #include "TestHeightMapMesh.h"
 #include "TestLvlPlanMesh.h"
 
 int main(int argc, char *argv[])
 {
-	//Execute all tests
 	TestImageProcessor testImageProcessor ;
 	QTest::qExec(&testImageProcessor, argc, argv);
 

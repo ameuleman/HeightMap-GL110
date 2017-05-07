@@ -25,7 +25,7 @@
 //==============================================================================
 /**
 *  @class  ImageProcessor
-*  @brief  ImageProcessor is Class to load an image and process it.
+*  @brief  ImageProcessor is a Class to load an image and process it.
 *			Uses Canny's algorithm to perform edge detection.
 */
 //==============================================================================
@@ -57,6 +57,13 @@ public:
 	 * @throws
 	 */
 	void processImage();
+
+	/**
+	 * @brief setRawData Set the raw data of the imageProcessor and call processImage
+	 * to apply Canny algorithm and update all the atributes
+	 * @param imageData
+	 */
+	void setRawData(Types::float_matrix const & imageData);
 
 	/**
 	 * @brief getRawData get data corresponding to an image

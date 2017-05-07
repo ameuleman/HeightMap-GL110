@@ -41,6 +41,14 @@ ImageProcessor::ImageProcessor()
 }
 
 //------------------------------------------------------------------------------
+void ImageProcessor::setRawData(Types::float_matrix const & imageData)
+//------------------------------------------------------------------------------
+{
+	m_rawData = imageData;
+	processImage();
+}
+
+//------------------------------------------------------------------------------
 Types::float_matrix ImageProcessor::getRawData() const
 //------------------------------------------------------------------------------
 {

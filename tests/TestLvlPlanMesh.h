@@ -1,9 +1,31 @@
 #ifndef TESTLVLPLANMESH_H
 #define TESTLVLPLANMESH_H
 
+/**
+*******************************************************************************
+*
+*  @file	TestLvlPlanMesh.h
+*
+*  @brief	Class to test LvlPlan class. Test its creation by
+* calling LvlPlan constructor.
+*
+*  @author	Andréas Meuleman
+*******************************************************************************
+*/
+
+//******************************************************************************
+//  Include
+//******************************************************************************
 #include <QString>
 #include <QtTest>
 
+//==============================================================================
+/**
+*  @class  TestHeightMapMesh
+*  @brief  TestHeightMapMesh is a Class to test LvlPlan class. Test its creation by
+* calling LvlPlan constructor.
+*/
+//==============================================================================
 class TestLvlPlanMesh : public QObject
 {
 	Q_OBJECT
@@ -23,18 +45,6 @@ private Q_SLOTS:
 	 * with one as width and length ans zero as height
 	 */
 	void testNullHeightCase();
-
-	/**
-	 * @brief testNegativeHeightCase  Test the construction of the plan mesh
-	 * with a negative height
-	 */
-	void testNegativeHeightCase();
-
-	/**
-	 * @brief testNegativeSizeCase Make sure an exception is thrown
-	 * in case of negative size
-	 */
-	void testNegativeSizeCase();
 
 	/**
 	 * @brief testUsualCase Test the construction of the plan mesh
