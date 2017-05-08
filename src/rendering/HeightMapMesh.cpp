@@ -7,8 +7,6 @@
 * to displpay it thanks to OpenGL.
 * Produce a mesh contained in a cuboid of size 150 * 150 * 50
 *
-*  @date       16/06/2016
-*
 *  @author     Andréas Meuleman
 *******************************************************************************
 */
