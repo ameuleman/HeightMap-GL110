@@ -16,7 +16,7 @@ To launch it, open ***heightMap-GL2.pro*** with QtCreator.
 
 Additional data to test the program are available in ***additional***_***data***/.
 
-For more information, see ***doc***/***annotated.html***.
+For more information, see ***doc***/.
 
 ## Results
 ![raw](/results/city_raw.png)
