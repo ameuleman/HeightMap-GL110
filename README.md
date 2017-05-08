@@ -14,7 +14,7 @@ The project requires a ***C++11*** capable compiler, ***OpenGL 2.0***, ***Qt 5.6
 
 To launch it, open ***heightMap-GL2.pro*** with QtCreator.
 
-Additional data are available in *** additional_data ***.
+Additional data are available in ***additionaldata***.
 
 ## Results
 ![raw](/results/city_raw.png)
