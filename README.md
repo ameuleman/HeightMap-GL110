@@ -14,6 +14,8 @@ The project requires a ***C++11*** capable compiler, ***OpenGL 2.0***, ***Qt 5.6
 
 To launch it, open ***heightMap-GL2.pro*** with QtCreator.
 
+The subprojct corresponding to the main program is ***src***.
+
 Additional data to test the program are available in ***additional***_***data***/.
 
 For more information, see ***doc***/.
