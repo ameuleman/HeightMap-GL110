@@ -9,11 +9,12 @@ Shadows, diffuse and specular lightings are simulated for a better rendering.
 
 It is also possible to save the displayed image.
 
-
 ## Instructions
 The project requires a ***C++11*** capable compiler, ***OpenGL 2.0***, ***Qt 5.6*** and ***QtCreator 4*** or later.
 
 To launch it, open ***heightMap-GL2.pro*** with QtCreator.
+
+Additional data are available in ***additional_data/***.
 
 ## Results
 ![raw](/results/city_raw.png)
