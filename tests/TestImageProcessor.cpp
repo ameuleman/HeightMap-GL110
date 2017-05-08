@@ -15,8 +15,6 @@
 //******************************************************************************
 //  Include
 //******************************************************************************
-#include <iostream>
-
 #include "TestImageProcessor.h"
 #include "imageProcessing/ImageProcessor.h"
 
@@ -122,7 +120,7 @@ void TestImageProcessor::testOnesCase()
 
 	//Calculate a difference between expected and found results to compensate
 	//float imprecision.
-	const float acceptance = 0.0001;
+	const float acceptance = 0.0001f;
 
 	float smoothDataDelta(0.f);
 	float gradientDataDelta(0.f);
@@ -173,7 +171,7 @@ void TestImageProcessor::testUsualCase()
 
 	//Calculate a difference between expected and found results to compensate
 	//float imprecision.
-	const float acceptance = 0.0001;
+	const float acceptance = 0.0001f;
 
 	float smoothDataDelta(0.f);
 	float gradientDataDelta(0.f);

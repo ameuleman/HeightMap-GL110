@@ -23,3 +23,4 @@ SOURCES += main.cpp\
     TestHeightMapMesh.cpp \
     TestLvlPlanMesh.cpp
 
+RESOURCES = $$PWD/tests.qrc

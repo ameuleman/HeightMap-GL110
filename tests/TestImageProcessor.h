@@ -21,8 +21,6 @@
 #include <QString>
 #include <QtTest>
 
-#include "imageProcessing/ImageProcessor.h"
-
 //==============================================================================
 /**
 *  @class  TestHeightMapMesh
