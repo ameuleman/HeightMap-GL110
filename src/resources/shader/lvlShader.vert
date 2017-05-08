@@ -5,12 +5,9 @@
 
 /**
 *******************************************************************************
-*
 *  @file       lvlShader.vert
 *
 *  @brief      vertex shader to display the transparant lvl plan without shading
-*
-*  @author     Andréas Meuleman
 *******************************************************************************
 */
 

@@ -5,12 +5,9 @@
 
 /**
 *******************************************************************************
-*
 *  @file       displayShader.vert
 *
 *  @brief      vertex shader to display a mesh with shading
-*
-*  @author     Andréas Meuleman
 *******************************************************************************
 */
 

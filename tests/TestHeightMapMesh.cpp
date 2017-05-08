@@ -1,13 +1,10 @@
 /**
 *******************************************************************************
-*
 *  @file	TestHeightMapMesh.cpp
 *
 *  @brief	Class to test HeightMapMesh class. Test generateVertices  method by
 * calling HeightMapMesh constructor. Also test setIndex function from its
 * parent class Mesh.
-*
-*  @author	Andréas Meuleman
 *******************************************************************************
 */
 

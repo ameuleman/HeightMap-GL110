@@ -3,14 +3,11 @@
 
 /**
 *******************************************************************************
-*
 *  @file	TestImageProcessor.h
 *
 *  @brief	Class to test ImageProcessor class. Test applyLinearFilter, applyGradientNorm,
 *  and applyCannyAnlgorithm method by calling processImage. Also check if loadData method
 * throws the right exceptions.
-*
-*  @author	Andréas Meuleman
 *******************************************************************************
 */
 

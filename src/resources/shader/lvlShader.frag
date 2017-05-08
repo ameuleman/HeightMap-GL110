@@ -5,12 +5,9 @@
 
 /**
 *******************************************************************************
-*
 *  @file       lvlShader.frag
 *
 *  @brief      fragment shader to display the transparant lvl plan without shading
-*
-*  @author     Andréas Meuleman
 *******************************************************************************
 */
 

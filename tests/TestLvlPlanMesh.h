@@ -3,13 +3,10 @@
 
 /**
 *******************************************************************************
-*
 *  @file	TestLvlPlanMesh.h
 *
 *  @brief	Class to test LvlPlan class. Test its creation by
 * calling LvlPlan constructor.
-*
-*  @author	Andréas Meuleman
 *******************************************************************************
 */
 

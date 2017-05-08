@@ -5,12 +5,9 @@
 
 /**
 *******************************************************************************
-*
 *  @file       displayShader.frag
 *
 *  @brief      fragment shader to display a mesh with shading
-*
-*  @author     Andréas Meuleman
 *******************************************************************************
 */
 

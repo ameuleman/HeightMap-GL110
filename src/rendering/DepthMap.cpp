@@ -1,11 +1,8 @@
 /**
 *******************************************************************************
-*
 *  @file       DepthMap.cpp
 *
 *  @brief      Class to render to a buffer in order to create, for exemple, a shadow map.
-*
-*  @author     Andréas Meuleman
 *******************************************************************************
 */
 

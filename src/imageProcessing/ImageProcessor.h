@@ -3,13 +3,10 @@
 
 /**
 *******************************************************************************
-*
 *  @file	ImageProcessor.h
 *
 *  @brief	Class to load an image and process it.
 *			Uses Canny's algorithm to perform edge detection.
-*
-*  @author	Andréas Meuleman
 *******************************************************************************
 */
 

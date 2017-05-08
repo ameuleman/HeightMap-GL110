@@ -1,13 +1,10 @@
 /**
 *******************************************************************************
-*
 *  @file       HeightMapMesh.cpp
 *
 *  @brief      Class to create a height map mesh thanks to a file or data
 * to displpay it thanks to OpenGL.
 * Produce a mesh contained in a cuboid of size 150 * 150 * 50
-*
-*  @author     Andréas Meuleman
 *******************************************************************************
 */
 

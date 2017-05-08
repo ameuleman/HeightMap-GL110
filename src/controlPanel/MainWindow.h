@@ -3,12 +3,9 @@
 
 /**
 *******************************************************************************
-*
 *  @file	MainWindow.h
 *
 *  @brief	Class that describes a control panel for the application
-*
-*  @author	Andréas Meuleman
 *******************************************************************************
 */
 

@@ -3,8 +3,6 @@
 *  @file       main.cpp
 *
 *  @brief      Execute all unit tests
-*
-*  @author     Andréas Meuleman
 *******************************************************************************
 */
 

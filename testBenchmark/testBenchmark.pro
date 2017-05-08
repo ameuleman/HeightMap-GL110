@@ -14,7 +14,8 @@ include(../src/src.pri)
 
 INCLUDEPATH = $$PWD/../src/
 
-SOURCES += BenchmarkTest.cpp
+SOURCES += TestBenchmark.cpp
+
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 RESOURCES = $$PWD/testBenchmark.qrc

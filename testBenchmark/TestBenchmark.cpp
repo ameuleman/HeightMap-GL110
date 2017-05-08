@@ -1,12 +1,9 @@
 /**
 *******************************************************************************
-*
-*  @file	BenchmarkTest.cpp
+*  @file	TestBenchmark.cpp
 *
 *  @brief	Class to benchmark image processing and vertices generation and indexing.
 * Concern HeightMapMesh and ImageProcessing classes
-*
-*  @author	Andréas Meuleman
 *******************************************************************************
 */
 
@@ -26,12 +23,12 @@
  * vertices generation and indexing.
  * Concern HeightMapMesh and ImageProcessing classes
  */
-class BenchmarkTest : public QObject
+class TestBenchmark : public QObject
 {
 	Q_OBJECT
 
 public:
-	BenchmarkTest();
+	TestBenchmark();
 
 private Q_SLOTS:
 	/**
@@ -54,13 +51,13 @@ private Q_SLOTS:
 };
 
 //------------------------------------------------------------------------------
-BenchmarkTest::BenchmarkTest()
+TestBenchmark::TestBenchmark()
 //------------------------------------------------------------------------------
 {
 }
 
 //------------------------------------------------------------------------------
-void BenchmarkTest::testImageProcessingCase()
+void TestBenchmark::testImageProcessingCase()
 //------------------------------------------------------------------------------
 {
 	try
@@ -78,7 +75,7 @@ void BenchmarkTest::testImageProcessingCase()
 }
 
 //------------------------------------------------------------------------------
-void BenchmarkTest::testVerticesGenerationCase()
+void TestBenchmark::testVerticesGenerationCase()
 //------------------------------------------------------------------------------
 {
 	try
@@ -96,7 +93,7 @@ void BenchmarkTest::testVerticesGenerationCase()
 }
 
 //------------------------------------------------------------------------------
-void BenchmarkTest::testSetIndexCase()
+void TestBenchmark::testSetIndexCase()
 //------------------------------------------------------------------------------
 {
 	try
@@ -115,6 +112,6 @@ void BenchmarkTest::testSetIndexCase()
 	}
 }
 
-QTEST_APPLESS_MAIN(BenchmarkTest)
+QTEST_APPLESS_MAIN(TestBenchmark)
 
-#include "BenchmarkTest.moc"
+#include "TestBenchmark.moc"

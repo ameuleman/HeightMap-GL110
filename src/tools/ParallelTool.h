@@ -3,12 +3,9 @@
 
 /**
 *******************************************************************************
-*
 *  @file       ParallelTool.h
 *
 *  @brief      Class to handle functions to simplify parallel processing
-*
-*  @author     Andréas Meuleman
 *******************************************************************************
 */
 

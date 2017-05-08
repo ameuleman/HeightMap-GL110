@@ -1,11 +1,8 @@
 /**
 *******************************************************************************
-*
 *  @file       MainWindow.cpp
 *
 *  @brief      Class that describes a control panel for the application
-*
-*  @author     Andréas Meuleman
 *******************************************************************************
 */
 
