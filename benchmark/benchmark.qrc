@@ -1,0 +1,6 @@
+<RCC>
+    <qresource>
+        <file alias="largeImage.jpg">resources/largeImage.jpg</file>
+    </qresource>
+
+</RCC>
