@@ -16,9 +16,9 @@ To launch it, open `heightMap-GL2.pro` with QtCreator.
 
 The subprojct corresponding to the main program is `src`.
 
-Additional data to test the program are available in `additional_data/`.
+Additional data to test the program are available in [`additional_data/`](additional_data/).
 
-For more information, see `doc/`.
+For more information, see [`doc/`](doc/).
 
 ## Results
 ![raw](/results/city_raw.png)
