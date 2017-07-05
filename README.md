@@ -26,3 +26,7 @@ For more information, see [`doc/`](doc/).
 
 ![Canny](/results/city_canny.png)
 *Height map corresponding to the Canny image with a plan to hightlight edges*
+
+## License
+
+[LGPL](http://www.gnu.org/licenses/licenses.en.html)
