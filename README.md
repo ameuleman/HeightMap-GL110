@@ -21,7 +21,7 @@ Additional data to test the program are available in [`additional_data/`](additi
 For more information, see [`doc/`](doc/).
 
 ## Results
-The original image is from [niotex.blogspot.kr/](http://niotex.blogspot.kr/)
+The original image is from [niotex.blogspot.kr](http://niotex.blogspot.kr)
 
 ![raw](/results/city_raw.png)
 *Height map corresponding to the original image*
